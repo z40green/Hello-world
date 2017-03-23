@@ -1,0 +1,113 @@
+matlab设置路径
+path(path,'c:\mydir') //末端
+path('c:\mydir',path) //前端
+
+内存整理 pack
+存取数据：
+save FileName
+save FileName v1 v2 //保存变量v1,v1
+                    -append 添加
+                    -ascii ASCII文件 8bit
+load同理
+常用帮助函数
+help 列出所有函数分组名
+doc ToolboxName 列出工具包所有函数名
+doc FunName 给出使用方法
+lookfor KeyWord 对M文件进行单词检索
+docsearch 对Html进行单词检索
+可利用通配符及逻辑运算OR等
+--------------------------------------------------------------------------------
+
+数值数组 向量化运算
+1.递增/减1维数组
+(1)x=a:inc:b inc是步长，可省略为1
+(2)x=linspace(a,b,n) a,b为端点，产生等间隔N个数据
+   x=logspace(a,b,n)          ,产生对数等间隔n个
+(3)逐个输入x=[.,..,...,]
+
+产生列数组
+行数组x'
+
+2.二维数组
+   行与行间;
+   数组元素用,
+   可用编辑器创建
+   可以写成m文件
+   函数创建
+   ones()全1数组
+   zeros()全零
+   eye()单位
+   magic魔方
+   diag对角
+   
+   随机分布指令：
+   rng default 恢复随机流
+   rand(a,b) 产生0,1间axb随机数组
+   randi([a,b],c,d) 取ab间 cxd随机数
+   randperm(x) x个正整数随机排列
+   randn()正太随机
+   特殊矩阵函数gallery()
+(2)维度 ndims
+   大小 size各维度长度 length最大长度
+ (3)访问
+ A(r,c)相当于c
+ A(r,:)r行上全部列
+ A(:,c)
+ 
+ A(:) 自左至右形成一维长列
+ A(s) s可为一个数组
+ A(L) L为逻辑数组，与A一样大，算出其中是1的
+(3)扩充收缩
+   (1)标点[a,b] [a;b]
+   (2)repmat(a,[c,d])将a复制成cxd的
+   (3)[]空字符收缩 A(1:2,3)=[];
+2.特殊操作
+   (1)reshape
+      reshape(a,b,c)把数组a变成bxc的矩阵
+    (2)翻转
+    flipud(A)上下中分线翻转=flipdim(A,1)
+    fliplr(A)左右中分线翻转=flipdim(A,2)
+    A'共轭转置
+    (3)旋转
+    rot90(A)以(1,1)元素逆时针转90度
+    rot90(A)、。。。。转两次
+    (4)行列平移
+    circshift(A,1)下移一行(循环)
+    circshift(A,[0,-1])左移一列
+ -------------------------------------------------------------------
+ 数组运算
+ exp sqrt pow2
+ 
+ ceil floor mod
+ abs angle real image
+ sign
+ meshgrid()指定区域内所有坐标点
+ norm()接近eps，可用来判断0
+cumsum()数组每列元素的累计
+sum()每列全部元素和
+cumprod()累计积
+prod()全部元素积
+
+dot(a,b)ab点乘
+cross(a,b)ab叉乘
+--------------------------------------------------------------------
+高维数组
+1.创建
+借助 cat repmat reshape
+cat(DIM,a,b)将a,b联结成DIM维的矩阵
+2.孤维删除
+squeeze(A)删除且相对位置不变      
+shiftdim(A)删除前导孤维
+shiftdim(A,n)维度左移n次后若最右是孤维则删除  
+3.维度重新排列
+permute(A,DimOrder_0)
+逆操作ipermute(A,DimOrder_i)
+DimOrder_0=[3,2,1];
+--------------------------------------------------------------------
+非数NaN
+判断非数isnan(a)
+[rol,col,value]=find(A)
+(find直接返回的是索引并非下标，可用ind2sub(size(A),find(A))转换)
+空数组[]
+判断isempty()
+可用来缩小数组大小
